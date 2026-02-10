@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>Үйлдвэрлэлийн дадлагын тайлан - Оршил</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="style.css" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+.page-title{
+  color: white;
+}
+
+.slide {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.intro-container {
+    max-width: 1100px;
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.page-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 35px;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.7);
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.info-card {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.6));
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.25);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.info-card h2 {
+    font-size: 20px;
+    color: #93c5fd;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-card h2 i {
+    color: #60a5fa;
+}
+
+.info-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.info-card p:last-child {
+    margin-bottom: 0;
+}
+
+.info-card strong {
+    color: #93c5fd;
+    font-weight: 600;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.tech-tag {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tech-tag i {
+    color: #60a5fa;
+    font-size: 11px;
+}
+
+.goals-section {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.6));
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.goals-section h2 {
+    font-size: 20px;
+    color: #93c5fd;
+    margin-bottom: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.goals-section h2 i {
+    color: #60a5fa;
+}
+
+.goal-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.goal-item {
+    background: rgba(59, 130, 246, 0.08);
+    border-radius: 12px;
+    padding: 15px;
+    border-left: 3px solid #14b8a6;
+    transition: all 0.3s ease;
+}
+
+.goal-item:hover {
+    background: rgba(59, 130, 246, 0.15);
+    transform: translateX(3px);
+}
+
+.goal-item h3 {
+    font-size: 15px;
+    color: #60a5fa;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.goal-item h3 i {
+    color: #14b8a6;
+    font-size: 13px;
+}
+
+.goal-item p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #cbd5e1;
+    margin: 0;
+}
+
+.nav-dot, .nav-arrow {
+    cursor: pointer;
+}
+
+.nav-dot.active {
+    background-color: #3b82f6;
+}
+</style>
+</head>
+<body>
+
+<div class="slide-number" id="slideNumber">3 / 9</div>
+
+<div class="nav-arrow left" onclick="window.location.href='aguulga.html'">
+  <div class="arrow-icon">←</div>
+</div>
+<div class="nav-arrow right" onclick="window.location.href='company-intro.html'">
+  <div class="arrow-icon">→</div>
+</div>
+
+<div class="slides-container">
+  <div class="slide">
+    <img src="num.png" class="bg-logo left" alt="МУИС Logo">
+    <img src="compony.png" class="bg-logo right" alt="Компанийн Logo">
+    
+    <div class="intro-container">
+      <h1 class="page-title">Оршил</h1>
+      
+      <div class="content-grid">
+        <div class="info-card">
+          <h2><i class="fas fa-briefcase"></i> Дадлагын мэдээлэл</h2>
+          <p>Миний бие<strong> Б.Бат-Эрдэнэ</strong> - <strong>"Коор Майнд ХХК"</strong> компанид frontend хөгжүүлэгчээр дадлага хийсэн.</p>
+          <p><strong>Төслүүд:</strong> "Синдүра Мед" эмнэлгийн цаг захиалгын систем, "И-Монос" худалдааны систем.</p>
+          <p>Багийн хамтын ажиллагаа, бодит процесс, арга барилуудтай танилцаж, онолын мэдлэгээ практикт хэрэгжүүлсэн.</p>
+        </div>
+        
+        <div class="info-card">
+          <h2><i class="fas fa-cogs"></i> Ашигласан технологи</h2>
+          <p>Орчин үеийн технологиудыг ашиглан төслийн хэрэгжилтэд оролцсон:</p>
+          <div class="tech-tags">
+            <span class="tech-tag"><i class="fab fa-react"></i> Next.js</span>
+            <span class="tech-tag"><i class="fab fa-js"></i> TypeScript</span>
+            <span class="tech-tag"><i class="fas fa-palette"></i> Shadcn UI</span>
+            <span class="tech-tag"><i class="fab fa-node-js"></i> Node.js</span>
+            <span class="tech-tag"><i class="fas fa-exchange-alt"></i> REST API</span>
+            <span class="tech-tag"><i class="fab fa-python"></i> Django</span>
+            <span class="tech-tag"><i class="fab fa-react"></i> React</span>
+            <span class="tech-tag"><i class="fas fa-code"></i> Nuqs</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="goals-section">
+        <h2><i class="fas fa-bullseye"></i> Зорилго, зорилт</h2>
+        <div class="goal-items">
+          <div class="goal-item">
+            <h3><i class="fas fa-graduation-cap"></i> Ерөнхий зорилго</h3>
+            <p>Next.js, Shadcn UI, Node.js, REST API, Django, TypeScript зэрэг технологиудын мэдлэгээ бататган, бодит ажлын төслүүд дээр ашиглан мэргэжлийн ур чадвараа хөгжүүлэх.</p>
+          </div>
+          <div class="goal-item">
+            <h3><i class="fas fa-code"></i> Хөгжүүлэлтийн зорилт</h3>
+            <p>Өгөгдсөн шаардлагын хүрээнд frontend хөгжүүлэлт гүйцэтгэх, REST API ашиглан өгөгдөл дамжуулалт хийх.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-indicators">
+  <div class="nav-dot" onclick="window.location.href='index.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='aguulga.html'"></div>
+  <div class="nav-dot active" onclick="window.location.href='orshil.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='company-intro.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='system.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='learning.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='my-work.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='conclusion.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='demo.html'"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

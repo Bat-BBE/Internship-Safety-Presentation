@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>Үйлдвэрлэлийн дадлагын тайлан - Агуулга</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="style.css" rel="stylesheet">
+<style>
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b, #1d4ed8);
+    color: #e5e7eb;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.slide-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  margin: 15px 0;
+  font-weight: 700;
+  text-shadow: 0 3px 10px rgba(0,0,0,.7);
+  line-height: 1.2;
+  color: white;
+}
+
+.content-list {
+    counter-reset: section;
+    list-style: none;
+    padding: 0;
+}
+
+.content-list > li {
+    counter-increment: section;
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    background: linear-gradient(145deg, rgba(55, 76, 109, 0.7), rgba(22, 43, 86, 0.6));
+    border-radius: 12px;
+    border-left: 4px solid #60a5fa;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.content-list > li:hover {
+    transform: translateX(8px);
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 8px 20px rgba(59,130,246,0.2);
+}
+
+.content-list > li.active {
+    background: rgba(59,130,246,0.15);
+    border-left: 4px solid #3b82f6;
+}
+
+.content-list > li::before {
+    content: counter(section);
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 5px 12px rgba(59,130,246,0.3);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.content-list > li:hover::before {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.content-list > li > span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 30px;
+    transition: all 0.3s ease;
+}
+
+.content-list > li > span i {
+    color: #60a5fa;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.content-list > li:hover > span {
+    color: #ffffff;
+}
+
+.content-list > li:hover > span i {
+    color: #93c5fd;
+    transform: scale(1.1);
+}
+
+.sub-list-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+    opacity: 0;
+}
+
+.content-list > li:hover .sub-list-container,
+.content-list > li.active .sub-list-container {
+    max-height: 400px;
+    opacity: 1;
+}
+
+.sub-list {
+    list-style: none;
+    padding-right: 20px;
+    margin: 8px 0 0 50px;
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+.content-list > li:hover .sub-list,
+.content-list > li.active .sub-list {
+    transform: translateY(0);
+}
+
+.sub-list li {
+    margin-bottom: 5px;
+    padding: 8px 15px;
+    background: rgba(30,41,59,0.5);
+    border-radius: 10px;
+    border-left: 3px solid #14b8a6;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-15px);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.content-list > li:hover .sub-list li,
+.content-list > li.active .sub-list li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.sub-list li:nth-child(1){ transition-delay: 0.05s; }
+.sub-list li:nth-child(2){ transition-delay: 0.1s; }
+.sub-list li:nth-child(3){ transition-delay: 0.15s; }
+.sub-list li:nth-child(4){ transition-delay: 0.2s; }
+.sub-list li:nth-child(5){ transition-delay: 0.25s; }
+
+.sub-list li:hover {
+    background: rgba(30,41,59,0.7);
+    transform: translateX(5px) !important;
+    border-left: 3px solid #10b981;
+}
+
+.sub-list li::before {
+    content: "▸";
+    color: #14b8a6;
+    font-weight: bold;
+    display: inline-block;
+    width: 18px;
+    transition: all 0.3s ease;
+}
+
+.sub-list li:hover::before {
+    color: #10b981;
+    transform: scale(1.2);
+}
+
+.project-icon {
+    color: #14b8a6;
+    margin-right: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.sub-list li:hover .project-icon {
+    color: #10b981;
+    transform: scale(1.1);
+}
+
+.expand-indicator {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #60a5fa;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.content-list > li:hover .expand-indicator {
+    transform: translateY(-50%) rotate(90deg);
+    color: #93c5fd;
+}
+</style>
+</head>
+<body>
+
+<div class="slide-number" id="slideNumber">2 / 9</div>
+
+<div class="nav-arrow left" id="navArrowLeft" onclick="window.location.href='index.html'">
+  <div class="arrow-icon">←</div>
+</div>
+<div class="nav-arrow right" id="navArrowRight" onclick="window.location.href='orshil.html'">
+  <div class="arrow-icon">→</div>
+</div>
+
+<div class="slides-container">
+  <div class="slide">
+    <img src="num.png" class="bg-logo left" alt="МУИС Logo">
+    <img src="compony.png" class="bg-logo right" alt="Компанийн Logo">
+    
+    <div class="slide-content">
+      <div class="page-header">
+        <h1>Агуулга</h1>
+      </div>
+      
+      <div>
+        <ol class="content-list">
+          <li>
+            <span><i class="fas fa-book"></i> Оршил</span>
+            <span class="expand-indicator">›</span>
+            <div class="sub-list-container">
+              <ul class="sub-list">
+                <li>Дадлагын зорилго, зорилт</li>
+              </ul>
+            </div>
+          </li>
+          
+          <li>
+            <span><i class="fas fa-building"></i> Байгууллагын танилцуулга</span>
+            <span class="expand-indicator">›</span>
+            <div class="sub-list-container">
+              <ul class="sub-list">
+                <li>Коор Майнд ХХК-ийн ерөнхий мэдээлэл</li>
+              </ul>
+            </div>
+          </li>
+          
+          <li>
+            <span><i class="fas fa-notes-medical"></i> Ажилласан систем</span>
+            <span class="expand-indicator">›</span>
+            <div class="sub-list-container">
+              <ul class="sub-list">
+                <li><i class="fas fa-hospital project-icon"></i> "Синдүра Мед" эмнэлгийн цаг захиалгын систем</li>
+              </ul>
+            </div>
+          </li>
+          
+          <li>
+            <span><i class="fas fa-lightbulb"></i> Судалсан зүйлс</span>
+            <span class="expand-indicator">›</span>
+            <div class="sub-list-container">
+              <ul class="sub-list">
+                <li>Next.js болон TypeScript</li>
+                <li>Shadcn/ui болон Nuqs</li>
+                <li>SSR, SSG болон Django Framework</li>
+              </ul>
+            </div>
+          </li>
+          
+          <li>
+            <span><i class="fas fa-clipboard-list"></i> Миний хийсэн ажил</span>
+            <span class="expand-indicator">›</span>
+            <div class="sub-list-container">
+              <ul class="sub-list">
+                <li>Хэрэглэгч талын Frontend хөгжүүлэлт</li>
+                <li>Админ талын Frontend хөгжүүлэлт</li>
+                <li>Frontend болон backend талуудыг холбох</li>
+              </ul>
+            </div>
+          </li>
+          
+          <li>
+            <span><i class="fas fa-check-circle"></i> Дүгнэлт</span>
+            <span class="expand-indicator">›</span>
+            <div class="sub-list-container">
+              <ul class="sub-list">
+                <li>Дадлагын ерөнхий дүгнэлт</li>
+              </ul>
+            </div>
+          </li>
+          
+          <li>
+            <span><i class="fas fa-project-diagram"></i> Хэрэгжүүлсэн системийн загвар</span>
+            <span class="expand-indicator">›</span>
+            <div class="sub-list-container">
+              <ul class="sub-list">
+                <li>"Синдүра Мед" эмнэлгийн цаг захиалгын систем загвар харуулах</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-indicators">
+  <div class="nav-dot" onclick="window.location.href='index.html'"></div>
+  <div class="nav-dot active" onclick="window.location.href='aguulga.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='orshil.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='company-intro.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='system.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='learning.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='my-work.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='conclusion.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='demo.html'"></div>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const listItems = document.querySelectorAll('.content-list > li');
+    listItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' || e.target.closest('a')) return;
+            this.classList.toggle('active');
+            listItems.forEach(other => { if(other!==this) other.classList.remove('active'); });
+        });
+    });
+});
+</script>
+
+</body>
+</html>

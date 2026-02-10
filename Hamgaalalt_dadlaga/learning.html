@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>Судалсан зүйлс</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="style.css" rel="stylesheet">
+<style>
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --primary-light: #60a5fa;
+    --accent: #14b8a6;
+    --accent-light: #2dd4bf;
+    --text: #f8fafc;
+    --text-light: #cbd5e1;
+    --text-muted: #94a3b8;
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.85);
+    --border: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.05);
+    --shadow: rgba(0, 0, 0, 0.25);
+    --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    --gradient-accent: linear-gradient(135deg, #14b8a6, #0d9488);
+    --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.85));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b, #1d4ed8);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.scrollable-page {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.05);
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.circle-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -200px;
+    right: -200px;
+    background: rgba(20, 184, 166, 0.06);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 10px auto 40px;
+    padding: 40px 20px 40px;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    background-clip: text;
+    font-weight: 700;
+    text-shadow: 0 3px 10px rgba(0,0,0,.7);
+    line-height: 1.2;
+}
+
+.header-subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+.section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--accent);
+    font-size: 18px;
+}
+
+.research-topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.research-topic {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.research-topic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-primary);
+}
+
+.research-topic:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.topic-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.topic-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.topic-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+}
+
+.topic-subtitle {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.topic-content {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-light);
+    margin-bottom: 12px;
+}
+
+.topic-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.topic-features li {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.3;
+}
+
+.topic-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 10px;
+}
+
+/* Compact layout */
+.compact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.compact-item {
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    transition: all 0.3s ease;
+}
+
+.compact-item:hover {
+    background: rgba(99, 102, 241, 0.08);
+    transform: translateY(-2px);
+}
+
+.compact-item h4 {
+    font-size: 16px;
+    color: var(--primary-light);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.compact-item p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--text-light);
+}
+
+.note-box {
+    background: rgba(20, 184, 166, 0.1);
+    border-radius: 12px;
+    padding: 18px;
+    border-left: 4px solid var(--accent);
+    margin-top: 20px;
+}
+
+.note-box p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.note-box strong {
+    color: var(--accent-light);
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn i {
+    font-size: 16px;
+}
+
+.slide-indicator {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.slide-indicator .current {
+    color: var(--primary-light);
+    font-weight: 700;
+}
+
+.scrollable-page::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-page::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.scrollable-page::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.5);
+    border-radius: 10px;
+}
+
+.scrollable-page::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.8);
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: var(--gradient-accent);
+    z-index: 1000;
+    transition: width 0.1s ease;
+}
+</style>
+</head>
+<body>
+<div class="slide-number">6 / 9</div>
+
+<div class="nav-arrow left" onclick="window.location.href='system.html'">
+  <div class="arrow-icon">←</div>
+</div>
+<div class="nav-arrow right" onclick="window.location.href='my-work.html'">
+  <div class="arrow-icon">→</div>
+</div>
+
+<div class="scrollable-page">
+    <img src="num.png" class="bg-logo left" alt="МУИС Logo">
+    <img src="compony.png" class="bg-logo right" alt="Компанийн Logo">
+    <div class="container">
+        <div class="header">
+            <h1>Судалсан зүйлс</h1>
+            <p class="header-subtitle">Дадлагын хүрээнд судалсан технологи, фрэймворк, шийдлүүд</p>
+        </div>
+        
+        <!-- Scrollable content area -->
+        <div class="scrollable-content">
+            <!-- Section 3.1: Next.js болон TypeScript -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i> 3.1 Next.js & TypeScript</h2>
+                
+                <div class="research-topics">
+                    <div class="research-topic">
+                        <div class="topic-header">
+                            <div class="topic-icon">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <div>
+                                <h3 class="topic-title">Next.js Framework</h3>
+                                <p class="topic-subtitle">SSR, SSG, Performance</p>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-content">
+                            React дээр суурилсан фрэймворк. Сервер талын рендеринг, статик сайт үүсгэх, routing болон performance оновчтой болгох.
+                        </div>
+                        
+                        <ul class="topic-features">
+                            <li>Сервер талын рендеринг (SSR)</li>
+                            <li>Статик сайт үүсгэх (SSG)</li>
+                            <li>Файл-д суурилсан routing</li>
+                            <li>API Routes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="research-topic">
+                        <div class="topic-header">
+                            <div class="topic-icon">
+                                <i class="fab fa-js-square"></i>
+                            </div>
+                            <div>
+                                <h3 class="topic-title">TypeScript</h3>
+                                <p class="topic-subtitle">Static Typing, Type Safety</p>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-content">
+                            Static typing ашиглан хөгжүүлэлтийн эхэн үеийн алдааг илрүүлэх. Том төслүүдэд код илүү цэгцтэй, найдвартай болгох.
+                        </div>
+                        
+                        <ul class="topic-features">
+                            <li>Хөгжүүлэлтийн эхний шатанд алдааг илрүүлэх.</li>
+                            <li>Том төслүүдэд код илүү цэгцтэй, найдвартай болгоно.</li>
+                            <li>IDE-д (Visual Studio Code гэх мэт) дэмжлэг сайжирн</li>
+                            <li>Кодын чанар сайжирна, багийн хамтын ажиллагаанд тохиромжтой.</li>
+                            <li>Том төслүүдийг өргөжүүлэхэд (scalability) хялбар.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3.2: Shadcn/ui болон Tailwind CSS -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-paint-brush"></i> 3.2 UI Development</h2>
+                
+                <div class="research-topics">
+                    <div class="research-topic">
+                        <div class="topic-header">
+                            <div class="topic-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div>
+                                <h3 class="topic-title">Shadcn/ui</h3>
+                                <p class="topic-subtitle">Component Library</p>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-content">
+                            Tailwind CSS дээр суурилсан React компонентууд. Accessibility стандартууд, орчин үеийн UI дизайн.
+                        </div>
+                        
+                        <ul class="topic-features">
+                            <li>Accessibility-first → хүртээмжтэй</li>
+                            <li>Бүрэн өөрчлөх боломжтой (customizable)</li>
+                            <li>TypeScript дэмждэг</li>
+                            <li>Dark mode дэмжлэгтэй</li>
+                            <li>Runtime-д ямар нэгэн нэмэлт ачаалал үүсгэдэггүй</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="research-topic">
+                        <div class="topic-header">
+                            <div class="topic-icon">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <div>
+                                <h3 class="topic-title">Tailwind CSS</h3>
+                                <p class="topic-subtitle">Utility-first CSS</p>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-content">
+                            Utility-first зарчимд суурилсан CSS фрэймворк. Хурдан прототип хийх, mobile-first дизайн.
+                        </div>
+                        
+                        <ul class="topic-features">
+                            <li>Түргэн прототип хийх боломжтой.</li>
+                            <li>Mobile-first, responsive дизайн хийхэд тохиромжтой.</li>
+                            <li>Customizable</li>
+                            <li>Бага хэмжээтэй bundle → хурдан ачаалах.</li>
+                            <li>Хөгжүүлэгчдэд тохиромжтой, код цэгцтэй.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3.3: Nuqs болон State Management -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-sitemap"></i> 3.3 State Management</h2>
+                
+                <div class="research-topics">
+                    <div class="research-topic">
+                        <div class="topic-header">
+                            <div class="topic-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div>
+                                <h3 class="topic-title">Nuqs</h3>
+                                <p class="topic-subtitle">URL Synchronized State</p>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-content">
+                            UI төлөв болон URL query параметрүүдийг синхрончлох. React state-тэй нэгтгэл ашиглах.
+                        </div>
+                        
+                        <ul class="topic-features">
+                            <li>React UI-ийн төлөв (state) болон URL query параметрүүдийг синхрончлох</li>
+                            <li>Server state болон local state-ийг тусад нь удирдах боломжтой</li>
+                            <li>Light-weight, Next.js-д оновчтой</li>
+                            <li>Static Typing-тэй нийцдэг → type-safe</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3.4: SSR, SSG болон Django Framework -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-server"></i> 3.4 Backend & Performance</h2>
+                
+                <div class="research-topics">
+                    <div class="research-topic">
+                        <div class="topic-header">
+                            <div class="topic-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h3 class="topic-title">SSR vs SSG</h3>
+                                <p class="topic-subtitle">Performance Comparison</p>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-content">
+                            SSR болон SSG-ийн үр нөлөөг performance болон SEO үзүүлэлтэд харьцуулан судалсан.
+                        </div>
+                        
+                        <ul class="topic-features">
+                            <li>SSR: Dynamic content</li>
+                            <li>SSG: Best performance</li>
+                            <li>Performance → ачаалалт хурдан, хэрэглэгчийн туршлага сайжирна.</li>
+                            <li>SEO → Google индексжүүлэлт сайжирна.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="research-topic">
+                        <div class="topic-header">
+                            <div class="topic-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <div>
+                                <h3 class="topic-title">Django REST</h3>
+                                <p class="topic-subtitle">Backend API</p>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-content">
+                            Сервер талын API хөгжүүлэлт. REST API хурдан хөгжүүлэх, Swagger API баримтжуулалт.
+                        </div>
+                        
+                        <ul class="topic-features">
+                            <li>Хурдан хөгжүүлэлт</li>
+                            <li>Хэрэглэгчийн нэвтрэлт бэлэн</li>
+                            <li>Өгөгдлийг JSON руу хөрвүүлэх</li>
+                            <li>REST API-ийг баримтжуулах</li>
+                            <li>Өгөгдлийг удирдах веб интерфейс</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Research Findings -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> Судалгааны үр дүн</h2>
+                
+                <div class="compact-grid">
+                    <div class="compact-item">
+                        <h4><i class="fas fa-rocket"></i> Performance</h4>
+                        <p>SSR/SSG ашигласнаар ачаалалтын хурд 40%-иар сайжирсан. Lighthouse score 90+.</p>
+                    </div>
+                    
+                    <div class="compact-item">
+                        <h4><i class="fas fa-search"></i> SEO</h4>
+                        <p>SSR ашигласнаар SEO оновчтой болж, Google индексжүүлэлт сайжирсан.</p>
+                    </div>
+                    
+                    <div class="compact-item">
+                        <h4><i class="fas fa-code"></i> Productivity</h4>
+                        <p>TypeScript болон Tailwind CSS ашигласнаар бүтээмж 30%-иар нэмэгдсэн.</p>
+                    </div>
+        
+                    <div class="compact-item">
+                        <h4><i class="fas fa-users"></i> Collaboration</h4>
+                        <p>Shadcn/ui ашигласнаар дизайн системийн нэгдмэл байдал хангагдсан.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nav-indicators">
+  <div class="nav-dot" onclick="window.location.href='index.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='aguulga.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='orshil.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='company-intro.html'"></div>
+  <div class="nav-dot active" onclick="window.location.href='system.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='learning.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='my-work.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='conclusion.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='demo.html'"></div>
+</div>
+
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const topics = document.querySelectorAll('.research-topic');
+    
+    topics.forEach((topic, index) => {
+        topic.style.opacity = '0';
+        topic.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            topic.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            topic.style.opacity = '1';
+            topic.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            window.location.href = 'system.html';
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            window.location.href = 'my-work.html';
+        }
+    });
+});
+</script>
+
+</body>
+</html>

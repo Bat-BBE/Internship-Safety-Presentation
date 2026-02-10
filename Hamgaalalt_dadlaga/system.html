@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>Ажилласан систем - Синдүра Мед</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="style.css" rel="stylesheet">
+<style>
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --primary-light: #60a5fa;
+    --accent: #14b8a6;
+    --accent-light: #2dd4bf;
+    --text: #f8fafc;
+    --text-light: #cbd5e1;
+    --text-muted: #94a3b8;
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.85);
+    --border: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.05);
+    --shadow: rgba(0, 0, 0, 0.25);
+    --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    --gradient-accent: linear-gradient(135deg, #14b8a6, #0d9488);
+    --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.85));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b, #1d4ed8);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.scrollable-page {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.05);
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.circle-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -200px;
+    right: -200px;
+    background: rgba(20, 184, 166, 0.06);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 40px 20px 40px;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    background-clip: text;
+    font-weight: 700;
+    text-shadow: 0 3px 10px rgba(0,0,0,.7);
+    line-height: 1.2;
+}
+
+.header-subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+.card {
+    background: var(--gradient-card);
+    border-radius: 18px;
+    padding: 19px;
+    border: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px var(--shadow);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.card-title {
+    font-size: 18px;
+    color: var(--primary-light);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+}
+
+.card-title i {
+    color: var(--accent);
+    font-size: 18px;
+}
+
+.system-overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+.overview-card p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-light);
+}
+.tech-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.tech-card {
+    padding: 20px;
+}
+.tech-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.tech-list li {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.5;
+}
+.tech-list li::before {
+    content: "▸";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Tabs */
+.tabs-container {
+    margin-bottom: 15px;
+}
+
+.tabs-header {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    padding: 10px 0;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+}
+
+.tab-btn {
+    padding: 12px 28px;
+    border-radius: 50px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: rgba(30, 41, 59, 0.7);
+    color: #93c5fd;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    background: rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+}
+
+.tab-btn.active {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+    border-color: transparent;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Workflow steps */
+.workflow-card {
+    padding: 15px;
+}
+
+.workflow-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    counter-reset: step-counter;
+}
+
+.workflow-steps li {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 18px;
+    padding-left: 55px;
+    position: relative;
+    line-height: 1.5;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.workflow-steps li::before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(59, 130, 246, 0.15);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-light);
+    transition: all 0.3s ease;
+}
+
+.workflow-steps li:hover::before {
+    background: var(--gradient-primary);
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Features list */
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.features-list li {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    padding-left: 32px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.features-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(20, 184, 166, 0.1);
+    border-radius: 50%;
+}
+
+/* System features */
+.system-features {
+    margin-top: 40px;
+    margin-bottom: 0px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    padding: 25px;
+    text-align: center;
+    border-top: 4px solid var(--accent);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    border-top-color: var(--primary);
+    transform: translateY(-8px);
+}
+
+.feature-icon {
+    font-size: 32px;
+    color: var(--primary-light);
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    background: var(--gradient-primary);
+    color: white;
+    transform: scale(1.1);
+}
+
+.feature-card h3 {
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Note box */
+.note-box {
+    background: rgba(20, 184, 166, 0.1);
+    border-radius: 12px;
+    padding: 18px;
+    border-left: 4px solid var(--accent);
+    margin-top: 20px;
+}
+
+.note-box p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.note-box strong {
+    color: var(--accent-light);
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn i {
+    font-size: 16px;
+}
+
+.slide-indicator {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.slide-indicator .current {
+    color: var(--primary-light);
+    font-weight: 700;
+}
+
+.scrollable-page::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-page::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.scrollable-page::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.5);
+    border-radius: 10px;
+}
+
+.scrollable-page::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.8);
+}
+.scroll-top-btn {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 99;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+    border: none;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: var(--gradient-accent);
+    z-index: 1000;
+    transition: width 0.1s ease;
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<button class="scroll-top-btn" id="scrollTopBtn">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<div class="slide-number">5 / 9</div>
+
+<div class="nav-arrow left" onclick="window.location.href='company-intro.html'">
+  <div class="arrow-icon">←</div>
+</div>
+
+<div class="nav-arrow right" onclick="window.location.href='learning.html'">
+  <div class="arrow-icon">→</div>
+</div>
+
+<div class="scrollable-page">
+    <img src="num.png" class="bg-logo left" alt="МУИС Logo">
+    <img src="compony.png" class="bg-logo right" alt="Компанийн Logo">
+    <div class="container">
+        <div class="header">
+            <h1>Ажилласан систем</h1>
+            <p class="header-subtitle">Синдүра Мед - Эмнэлгийн онлайн цаг захиалгын систем</p>
+        </div>
+
+        <div class="system-overview">
+            <div class="card overview-card">
+                <h2 class="card-title"><i class="fas fa-info-circle"></i> Системийн талаар товч</h2>
+                <p>Эмнэлгийн үзлэгийн цаг захиалгыг автоматжуулах, гарын үйллагааг багасгах, хэрэглэгчдэд үзлэгийн цагийг хурдан, хялбар захиалах боломж олгох, эмнэлгийн удирдлага, ажилтнуудад захиалга болон холбогдох мэдээллийг нэг цэгээс үр ашигтай удирдах нөхцөлийг бүрдүүлэх зорилготой веб систем. Хэрэглэгч болон Админ гэсэн хоёр хэсэгтэй.</p>
+            </div>
+            
+            <div class="tech-stack">
+                <div class="card tech-card">
+                    <h2 class="card-title"><i class="fab fa-python"></i> Backend технологи</h2>
+                    <ul class="tech-list">
+                        <li>Django Framework (Python)</li>
+                        <li>Django REST Framework (DRF)</li>
+                        <li>PostgreSQL мэдээллийн сан</li>
+                        <li>JWT Authentication</li>
+                    </ul>
+                </div>
+                
+                <div class="card tech-card">
+                    <h2 class="card-title"><i class="fab fa-react"></i> Frontend технологи</h2>
+                    <ul class="tech-list">
+                        <li>Next.js framework</li>
+                        <li>TypeScript програмчлалын хэл</li>
+                        <li>Tailwind CSS UI дизайн</li>
+                        <li>shadcn/ui компонент сан</li>
+                        <li>Nuqs query state</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="user-tab">
+                    <i class="fas fa-user"></i> Хэрэглэгчийн хэсэг
+                </button>
+                <button class="tab-btn" data-tab="admin-tab">
+                    <i class="fas fa-user-shield"></i> Админы хэсэг
+                </button>
+            </div>
+
+            <div id="user-tab" class="tab-content active">
+                <div class="card workflow-card">
+                    <h2 class="card-title"><i class="fas fa-list-ol"></i> Хэрэглэгчийн үйл ажиллагааны дараалал</h2>
+                    <ol class="workflow-steps">
+                        <li>Үйлчилгээний төрлийг сонгох</li>
+                        <li>Үзлэг хийх огноог сонгох</li>
+                        <li>Боломжит цагуудаас тохирохыг сонгох</li>
+                        <li>Эмчийг сонгох</li>
+                        <li>Хувийн мэдээлэл (овог нэр, утас, регистр) оруулах</li>
+                        <li>Урьдчилгаа төлбөр төлөх</li>
+                        <li>Захиалгыг баталгаажуулах</li>
+                    </ol>
+                    <div class="note-box">
+                        <p><strong>Мөн:</strong> "Миний захиалгын цаг" хэсэгт утасны дугаар, регистрийн дугаараар хийсэн захиалгуудаа шалгах боломжтой. Захиалгыг цаг авалгүй цуцлах, эмч солих боломжтой.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admin tab -->
+            <div id="admin-tab" class="tab-content">
+                <div class="card workflow-card">
+                    <h2 class="card-title"><i class="fas fa-tasks"></i> Админы үйл ажиллагааны боломжууд</h2>
+                    <ul class="features-list">
+                        <li>Системд нууцлалтай, аюулгүй нэвтрэх</li>
+                        <li>Эмчийн мэдээлэл нэмэх, засах, устгах</li>
+                        <li>Үйлчилгээний төрлүүд үүсгэх, шинэчлэх</li>
+                        <li>Үзлэг үүсгэх (ганц болон багцаар)</li>
+                        <li>Эмчийн ажлын цаг, үзлэгийн хуваарь тохируулах</li>
+                        <li>Захиалгуудыг жагсаалтаар харах, төлөв өөрчлөх</li>
+                        <li>Бүх захиалгыг нэгтгэн хянах, удирдах</li>
+                        <li>Статистик мэдээлэл харах (орлого, захиалгын тоо)</li>
+                        <li>Тайлан үүсгэх, хэвлэх</li>
+                        <li>Хэрэглэгчийн санал гомдлыг харах, шийдвэрлэх</li>
+                    </ul>
+                    <div class="note-box">
+                        <p>Эмнэлгийн өдөр тутмын үйл ажиллагааг илүү оновчтой, цаг алдалгүй, алдаа багатай зохион байгуулах боломжийг олгоно. Систем нь эмнэлгийн ажилтнуудад хялбар ашиглах интерфэйсээр бүтээгдсэн.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="system-features">
+            <h2 class="card-title" style="text-align: center; margin-bottom: 30px;">
+                <i class="fas fa-star"></i> Системийн онцлог
+            </h2>
+            
+            <div class="features-grid">
+                <div class="card feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Автоматжуулалт</h3>
+                    <p>Цаг захиалга, төлбөр, баталгаажуулалт, мэдэгдэл илгээх зэрэг үйлдлүүд автоматаар явагдана</p>
+                </div>
+                
+                <div class="card feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Аюулгүй байдал</h3>
+                    <p>JWT authentication, SSL нууцлал, хувийн мэдээллийн хамгаалалт, роль төвөгтэй хандалтын систем</p>
+                </div>
+                
+                <div class="card feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Responsive дизайн</h3>
+                    <p>Гар утас, таблет, компьютер дээр төгс дүрслэгдэх, бүх төрлийн төхөөрөмж дээр сайн ажиллана</p>
+                </div>
+                
+                <div class="card feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Статистик, тайлан</h3>
+                    <p>Захиалга, ачаалал, орлогын дүн шинжилгээ хийх, автомат тайлан үүсгэх боломжтой</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nav-indicators">
+  <div class="nav-dot" onclick="window.location.href='index.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='aguulga.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='orshil.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='company-intro.html'"></div>
+  <div class="nav-dot active" onclick="window.location.href='system.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='learning.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='my-work.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='conclusion.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='demo.html'"></div>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    const bgAnimation = document.querySelector('.bg-animation');
+    for (let i = 0; i < 5; i++) {
+        const circle = document.createElement('div');
+        circle.classList.add('bg-circle');
+        circle.style.width = Math.floor(Math.random() * 200 + 50) + 'px';
+        circle.style.height = circle.style.width;
+        circle.style.left = Math.floor(Math.random() * 100) + '%';
+        circle.style.top = Math.floor(Math.random() * 100) + '%';
+        circle.style.background = i % 2 === 0 
+            ? 'rgba(59, 130, 246, 0.03)' 
+            : 'rgba(20, 184, 166, 0.03)';
+        circle.style.filter = 'blur(' + (Math.floor(Math.random() * 30) + 20) + 'px)';
+        bgAnimation.appendChild(circle);
+    }
+    
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    const progressBar = document.getElementById('progressBar');
+    
+    window.addEventListener('scroll', function() {
+        // Show/hide scroll to top button
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+        
+        // Update progress bar
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + "%";
+    });
+    
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft' && e.ctrlKey) {
+            e.preventDefault();
+            window.location.href = 'company-intro.html';
+        } else if (e.key === 'ArrowRight' && e.ctrlKey) {
+            e.preventDefault();
+            window.location.href = 'learning.html';
+        }
+    });
+});
+</script>
+
+</body>
+</html>

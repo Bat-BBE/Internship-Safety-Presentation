@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>Үйлдвэрлэлийн дадлагын тайлан - Миний хийсэн ажил</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="style.css" rel="stylesheet">
+<style>
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --primary-light: #60a5fa;
+    --accent: #14b8a6;
+    --accent-light: #2dd4bf;
+    --text: #f8fafc;
+    --text-light: #cbd5e1;
+    --text-muted: #94a3b8;
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.85);
+    --border: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.05);
+    --shadow: rgba(0, 0, 0, 0.25);
+    --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    --gradient-accent: linear-gradient(135deg, #14b8a6, #0d9488);
+    --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.85));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b, #1d4ed8);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.scrollable-page {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.05);
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.circle-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -200px;
+    right: -200px;
+    background: rgba(20, 184, 166, 0.06);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 10px auto 40px;
+    padding: 40px 20px 40px;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    background-clip: text;
+    font-weight: 700;
+    text-shadow: 0 3px 10px rgba(0,0,0,.7);
+    line-height: 1.2;
+}
+
+.header-subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+.section {
+    margin-bottom: 25px;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--accent);
+    font-size: 18px;
+}
+
+/* Work categories */
+.work-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.work-category {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.work-category:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.category-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.category-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Work tasks */
+.work-tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.work-tasks li {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.work-tasks li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 10px;
+}
+
+/* Code examples */
+.code-example {
+    background: rgba(15, 23, 42, 0.8);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--accent-light);
+    overflow-x: auto;
+}
+
+.code-comment {
+    color: #64748b;
+    font-style: italic;
+}
+
+/* Implementation details */
+.implementation-details {
+    background: rgba(16, 185, 129, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    border-left: 3px solid var(--accent);
+}
+
+.detail-title {
+    font-size: 15px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.detail-content {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+/* Technical skills */
+.technical-skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.skill-item {
+    background: rgba(139, 92, 246, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+    background: rgba(139, 92, 246, 0.08);
+    transform: translateY(-2px);
+}
+
+.skill-item h4 {
+    font-size: 14px;
+    color: var(--primary-light);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.skill-item p {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-light);
+}
+
+</style>
+</head>
+<body>
+
+<div class="slide-number">7 / 9</div>
+
+<div class="nav-arrow left" onclick="window.location.href='learning.html'">
+    <div class="arrow-icon">←</div>
+</div>
+
+<div class="nav-arrow right" onclick="window.location.href='conclusion.html'">
+    <div class="arrow-icon">→</div>
+</div>
+
+<div class="scrollable-page">
+    <img src="num.png" class="bg-logo left" alt="МУИС Logo">
+    <img src="compony.png" class="bg-logo right" alt="Компанийн Logo">
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Миний хийсэн ажил</h1>
+            <p class="header-subtitle">Дадлагын 3-н долоо хоногт гүйцэтгэсэн ажлууд, хэрэгжүүлсэн модулиуд</p>
+        </div>
+        
+        <!-- Scrollable content area -->
+        <div class="scrollable-content">
+            <!-- User Frontend Development -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-user"></i> Хэрэглэгчийн Frontend хөгжүүлэлт</h2>
+                
+                <div class="work-categories">
+                    <div class="work-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3 class="category-title">Архитектур & бүтэц</h3>
+                        </div>
+                        
+                        <ul class="work-tasks">
+                            <li>Next.js дээр shadcn сангийн компонентуудыг ашиглан хөгжүүлсэн</li>
+                            <li>UI компонентуудыг Button, Input, Table, Modal гэх мэтээр хуваасан</li>
+                            <li>Кодын давтагдах байдал буурч, дахин ашиглах боломжийг нэмсэн</li>
+                        </ul>
+                        
+                        <div class="code-example">
+                            <span class="code-comment">// Компонентуудыг импортлох</span><br>
+                            import CategoryPicker from "@/components/CategoryPicker";<br>
+                            import DoctorPicker from "@/components/DoctorPicker";<br>
+                            import TimePicker from "@/components/TimePicker";
+                        </div>
+                    </div>
+                    
+                    <div class="work-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h3 class="category-title">Nuqs, Shadcn, Tailwind</h3>
+                        </div>
+                        
+                        <ul class="work-tasks">
+                            <li>Nuqs ашиглан URL query state удирдсан</li>
+                            <li>Shadcn/ui компонент санг ашигласан</li>
+                            <li>Tailwind CSS-ээр дизайныг гаргасан</li>
+                        </ul>
+                        
+                        <div class="implementation-details">
+                            <div class="detail-title">
+                                <i class="fas fa-lightbulb"></i> Шийдэл
+                            </div>
+                            <div class="detail-content">
+                                Хэрэглэгчийн сонголтыг URL-д хадгалж, refresh хийсэн ч устахгүй, хуваалцах боломжтой болгосон
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Modules -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-layer-group"></i> Хэрэглэгчийн модулиуд</h2>
+                <div class="work-categories">
+                    <div class="work-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h3 class="category-title">Цаг захиалгын систем</h3>
+                        </div>
+                        
+                        <ul class="work-tasks">
+                            <li>Үзлэгийн төрөл сонгох</li>
+                            <li>Огноо сонгох (RowDatePicker компонент)</li>
+                            <li>Цаг сонгох (TimePicker компонент)</li>
+                            <li>Эмч сонгох (DoctorPicker компонент)</li>
+                            <li>Хувийн мэдээлэл оруулах (RegisterForm)</li>
+                            <li>Сонгосон мэдээллийг баталгаажуулах (ConfirmSection)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="work-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <h3 class="category-title">Миний захиалгын цаг</h3>
+                        </div>
+                        
+                        <ul class="work-tasks">
+                            <li>Утасны дугаар эсвэл регистерийн оруулах форм</li>
+                            <li>Өмнөх захиалгуудыг жагсаалтаар харуулах</li>
+                            <li>API холболт (baseService ашигласан)</li>
+                            <li>Захиалгын дэлгэрэнгүй харах боломж</li>
+                        </ul>
+                        
+                        <div class="code-example">
+                            <span class="code-comment">// Миний захиалгын цаг - API дуудах</span><br>
+                            const getOrders = async (phone) => {<br>
+                            &nbsp;&nbsp;return await baseService({<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;endpoint: `/orders/?phone=${phone}`,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;method: "GET"<br>
+                            &nbsp;&nbsp;});<br>
+                            };
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admin Frontend Development -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-user-shield"></i> Админы Frontend хөгжүүлэлт</h2>
+                
+                <div class="work-categories">
+                    <div class="work-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            <h3 class="category-title">CRUD модулиуд</h3>
+                        </div>
+                        
+                        <ul class="work-tasks">
+                            <li>Doctor модуль - Эмчийн мэдээлэл удирдах</li>
+                            <li>Examination модуль - Үзлэгийн цаг удирдах</li>
+                            <li>ExaminationType модуль - Үзлэгийн төрөл удирдах</li>
+                            <li>Order модуль - Захиалгууд удирдах</li>
+                            <li>DataTable компонент үүсгэсэн</li>
+                            <li>Form validation хийсэн</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="work-category">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="fas fa-filter"></i>
+                            </div>
+                            <h3 class="category-title">Дэвшилтэт шинж чанарууд</h3>
+                        </div>
+                        
+                        <ul class="work-tasks">
+                            <li>Шүүлтүүр систем (жил, сар, төлөвөөр шүүх)</li>
+                            <li>Debounce ашиглан search оновчтой болгох</li>
+                            <li>Details хэсэг - захиалгын дэлгэрэнгүй харуулах</li>
+                            <li>URL query state хадгалах (refresh хийсэн ч алдахгүй)</li>
+                            <li>Pagination бүрэн ажиллагаатай</li>
+                        </ul>
+                        
+                        <div class="code-example">
+                            <span class="code-comment">// Order шүүлтүүр</span><br>
+                            endpoint: `/orders/?phone=${debouncedSearch}<br>
+                            &stage=${stageFilter}<br>
+                            &createdAt=${yearQuery}`,
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-check-circle"></i> Тест болон Баримтжуулалт</h2>
+                
+                <div class="technical-skills">
+                    <div class="skill-item">
+                        <h4><i class="fas fa-vial"></i> Unit Test</h4>
+                        <p>Гол компонент, функцуудын алдааг шалгаж, кодны чанарыг баталгаажуулсан.</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4><i class="fas fa-book"></i> API Баримтжуулалт</h4>
+                        <p>Swagger дээрх API ашиглан backend болон frontend хоорондын холболтыг боловсруулсан.</p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4><i class="fas fa-bug"></i> Debugging & Optimization</h4>
+                        <p>Performance алдаануудыг олж засаж, кодыг сайжруулсан.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nav-indicators">
+  <div class="nav-dot" onclick="window.location.href='index.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='aguulga.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='orshil.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='company-intro.html'"></div>
+  <div class="nav-dot active" onclick="window.location.href='system.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='learning.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='my-work.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='conclusion.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='demo.html'"></div>
+</div>
+
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categories = document.querySelectorAll('.work-category');
+    categories.forEach((category, index) => {
+        category.style.opacity = '0';
+        category.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            category.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            category.style.opacity = '1';
+            category.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            window.location.href = 'learning.html';
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            window.location.href = 'conclusion.html';
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<title>Үйлдвэрлэлийн дадлагын тайлан - Дүгнэлт</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="style.css" rel="stylesheet">
+<style>
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --primary-light: #60a5fa;
+    --accent: #14b8a6;
+    --accent-light: #2dd4bf;
+    --text: #f8fafc;
+    --text-light: #cbd5e1;
+    --text-muted: #94a3b8;
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.85);
+    --border: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.05);
+    --shadow: rgba(0, 0, 0, 0.25);
+    --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    --gradient-accent: linear-gradient(135deg, #14b8a6, #0d9488);
+    --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.85));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b, #1d4ed8);
+    color: var(--text);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Main layout */
+
+.slides{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto 40px;
+    padding: 20px 20px 40px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    background-clip: text;
+    font-weight: 700;
+    text-shadow: 0 3px 10px rgba(0,0,0,.7);
+    line-height: 1.2;
+}
+
+.header-subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+/* Compact Grid Layout */
+.compact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.grid-item {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.2);
+}
+
+.item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.item-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.item-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.item-content {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.compact-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+}
+
+.compact-list li {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+    padding-left: 15px;
+    position: relative;
+    line-height: 1.3;
+}
+
+.compact-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 12px;
+}
+
+/* Full width sections */
+.full-section {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border);
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Bottom section - smaller */
+.bottom-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.bottom-item {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid var(--border);
+}
+
+.bottom-header {
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.bottom-content {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+/* Final statement */
+.final-statement {
+    background: rgba(16, 185, 129, 0.08);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    text-align: center;
+}
+
+.final-text {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.5;
+    font-style: italic;
+}
+</style>
+</head>
+<body>
+
+<div class="slide-number">8 / 9</div>
+
+<div class="nav-arrow left" onclick="window.location.href='my-work.html'">
+    <div class="arrow-icon">←</div>
+</div>
+
+<div class="nav-arrow right" onclick="window.location.href='demo.html'">
+    <div class="arrow-icon">→</div>
+</div>
+<div class="slides">
+    <img src="num.png" class="bg-logo left" alt="МУИС Logo">
+    <img src="compony.png" class="bg-logo right" alt="Компанийн Logo">
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Дүгнэлт</h1>
+            <p class="header-subtitle">Үйлдвэрлэлийн дадлагын үр дүн, сурсан зүйлс</p>
+        </div>
+        
+        <!-- Compact Grid -->
+        <div class="compact-grid">
+            <div class="grid-item">
+                <div class="item-header">
+                    <div class="item-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="item-title">Ололт амжилт</h3>
+                </div>
+                <div class="item-content">
+                    Бодит төсөл дээр ажиллаж, практик туршлага олсон. Багийн болж ажиллах, код review хийх зэрэг мэргэжлийн ур чадвар эзэмшсэн.
+                </div>
+                <ul class="compact-list">
+                    <li>Бодит төсөл дээр ажиллах туршлага</li>
+                    <li>Баг болж хамтарч ажиллах</li>
+                    <li>Production код бичих</li>
+                </ul>
+            </div>
+            
+            <div class="grid-item">
+                <div class="item-header">
+                    <div class="item-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="item-title">Сурсан зүйлс</h3>
+                </div>
+                <div class="item-content">
+                    Эмнэлгийн системийн хөгжүүлэлт дээр ажиллаж, архитектур, компонент дизайн, REST API холболтын арга техник сурсан.
+                </div>
+                <ul class="compact-list">
+                    <li>Next.js, TypeScript</li>
+                    <li>REST API холболт</li>
+                    <li>System architecture</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Bottom Section -->
+        <div class="bottom-section">
+            <!-- Дадлагын үр дүн -->
+            <div class="full-section">
+                <div class="section-title">
+                    <i class="fas fa-chart-line"></i> Дадлагын үр дүн
+                </div>
+                <div class="item-content">
+                    Багийн ажиллагаанд идэвхтэй оролцож, төслийн менежмент, практик туршлага, системийн найдвартай байдлыг хангах арга барилуудыг сурсан.
+                </div>
+            </div>
+            <div class="full-section">
+                <div class="section-title">
+                    <i class="fas fa-rocket"></i> Цаашидаа хийх зүйлс
+                </div>
+                <div class="item-content">
+                    Олж авсан мэдлэгээ ашиглан илүү нарийн төслүүд хөгжүүлэх, open source төслүүдэд оролцох, веб хөгжүүлэлтийн чиглэлээр мэргэших.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Final Statement -->
+        <div class="final-statement">
+            <p class="final-text">
+                Ийнхүү "Синдүра Мед" систем дээр хийсэн дадлага нь миний мэргэжлийн ур чадварыг нэмэгдүүлж, цаашид веб хөгжүүлэлтийн чиглэлээр ажиллах хүсэл тэмүүллийг улам бататгалаа.
+            </p>
+        </div>
+    </div>
+</div>
+<div class="nav-indicators">
+  <div class="nav-dot" onclick="window.location.href='index.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='aguulga.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='orshil.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='company-intro.html'"></div>
+  <div class="nav-dot active" onclick="window.location.href='system.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='learning.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='my-work.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='conclusion.html'"></div>
+  <div class="nav-dot" onclick="window.location.href='demo.html'"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
