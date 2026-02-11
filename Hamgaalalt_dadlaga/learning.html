@@ -2,7 +2,7 @@
 <html lang="mn">
 <head>
 <meta charset="UTF-8">
-<title>Судалсан зүйлс</title>
+<title>Үйлдвэрлэлийн дадлагын тайлан - Судалсан зүйлс</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="style.css" rel="stylesheet">
@@ -239,7 +239,6 @@ body {
     font-size: 10px;
 }
 
-/* Compact layout */
 .compact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -248,7 +247,7 @@ body {
 }
 
 .compact-item {
-    background: rgba(99, 102, 241, 0.05);
+    background: rgba(44, 57, 84, 0.792);
     border-radius: 10px;
     padding: 15px;
     border: 1px solid rgba(99, 102, 241, 0.1);
@@ -388,10 +387,7 @@ body {
             <h1>Судалсан зүйлс</h1>
             <p class="header-subtitle">Дадлагын хүрээнд судалсан технологи, фрэймворк, шийдлүүд</p>
         </div>
-        
-        <!-- Scrollable content area -->
         <div class="scrollable-content">
-            <!-- Section 3.1: Next.js болон TypeScript -->
             <div class="section">
                 <h2 class="section-title"><i class="fas fa-code"></i> 3.1 Next.js & TypeScript</h2>
                 
@@ -410,7 +406,6 @@ body {
                         <div class="topic-content">
                             React дээр суурилсан фрэймворк. Сервер талын рендеринг, статик сайт үүсгэх, routing болон performance оновчтой болгох.
                         </div>
-                        
                         <ul class="topic-features">
                             <li>Сервер талын рендеринг (SSR)</li>
                             <li>Статик сайт үүсгэх (SSG)</li>
@@ -418,7 +413,7 @@ body {
                             <li>API Routes</li>
                         </ul>
                     </div>
-                    
+        
                     <div class="research-topic">
                         <div class="topic-header">
                             <div class="topic-icon">
@@ -445,9 +440,8 @@ body {
                 </div>
             </div>
             
-            <!-- Section 3.2: Shadcn/ui болон Tailwind CSS -->
             <div class="section">
-                <h2 class="section-title"><i class="fas fa-paint-brush"></i> 3.2 UI Development</h2>
+                <h2 class="section-title"><i class="fas fa-paint-brush"></i> 3.2 UI хөгжүүлэлт</h2>
                 
                 <div class="research-topics">
                     <div class="research-topic">
@@ -490,9 +484,8 @@ body {
                         </div>
                         
                         <ul class="topic-features">
-                            <li>Түргэн прототип хийх боломжтой.</li>
+                            <li>Хурдан прототип хийх боломжтой.</li>
                             <li>Mobile-first, responsive дизайн хийхэд тохиромжтой.</li>
-                            <li>Customizable</li>
                             <li>Бага хэмжээтэй bundle → хурдан ачаалах.</li>
                             <li>Хөгжүүлэгчдэд тохиромжтой, код цэгцтэй.</li>
                         </ul>
@@ -500,9 +493,8 @@ body {
                 </div>
             </div>
             
-            <!-- Section 3.3: Nuqs болон State Management -->
             <div class="section">
-                <h2 class="section-title"><i class="fas fa-sitemap"></i> 3.3 State Management</h2>
+                <h2 class="section-title"><i class="fas fa-sitemap"></i> 3.3 State удирдлага</h2>
                 
                 <div class="research-topics">
                     <div class="research-topic">
@@ -517,7 +509,7 @@ body {
                         </div>
                         
                         <div class="topic-content">
-                            UI төлөв болон URL query параметрүүдийг синхрончлох. React state-тэй нэгтгэл ашиглах.
+                            UI төлөв болон URL query параметрүүдийг синхрончлох. React state-тэй нэгтгэж ашиглах.
                         </div>
                         
                         <ul class="topic-features">
@@ -530,7 +522,6 @@ body {
                 </div>
             </div>
             
-            <!-- Section 3.4: SSR, SSG болон Django Framework -->
             <div class="section">
                 <h2 class="section-title"><i class="fas fa-server"></i> 3.4 Backend & Performance</h2>
                 
@@ -542,7 +533,7 @@ body {
                             </div>
                             <div>
                                 <h3 class="topic-title">SSR vs SSG</h3>
-                                <p class="topic-subtitle">Performance Comparison</p>
+                                <p class="topic-subtitle">Performance сайжруулалт</p>
                             </div>
                         </div>
                         
@@ -583,15 +574,14 @@ body {
                     </div>
                 </div>
             </div>
-            
-            <!-- Research Findings -->
+
             <div class="section">
                 <h2 class="section-title"><i class="fas fa-chart-line"></i> Судалгааны үр дүн</h2>
                 
                 <div class="compact-grid">
                     <div class="compact-item">
-                        <h4><i class="fas fa-rocket"></i> Performance</h4>
-                        <p>SSR/SSG ашигласнаар ачаалалтын хурд 40%-иар сайжирсан. Lighthouse score 90+.</p>
+                        <h4><i class="fas fa-rocket"></i> Ачаалалтын хурд</h4>
+                        <p>SSR/SSG зөв ашигласнаар ачаалалтын хурд сайжирсан.</p>
                     </div>
                     
                     <div class="compact-item">
@@ -600,12 +590,12 @@ body {
                     </div>
                     
                     <div class="compact-item">
-                        <h4><i class="fas fa-code"></i> Productivity</h4>
-                        <p>TypeScript болон Tailwind CSS ашигласнаар бүтээмж 30%-иар нэмэгдсэн.</p>
+                        <h4><i class="fas fa-code"></i> Бүтээмж</h4>
+                        <p>TypeScript болон Tailwind CSS ашигласнаар бүтээмж нэмэгдсэн.</p>
                     </div>
         
                     <div class="compact-item">
-                        <h4><i class="fas fa-users"></i> Collaboration</h4>
+                        <h4><i class="fas fa-users"></i> Хамтран ажиллагаа</h4>
                         <p>Shadcn/ui ашигласнаар дизайн системийн нэгдмэл байдал хангагдсан.</p>
                     </div>
                 </div>
